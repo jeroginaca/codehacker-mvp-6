@@ -1,9 +1,17 @@
-import React from 'react'
+import { BlogPosts, Contact, Footer, Freebie, HardSoftSkills, Hero, Objetivos, Payment, Programa, ProximasFechas } from "@/components/sections"
 
-const page = () => {
+export default function Home() {
   return (
-    <div>page</div>
+    <div className="bg-white">
+      <Hero />
+      <ProximasFechas />
+      <Programa />
+      <BlogPosts />
+      <Objetivos />
+      <HardSoftSkills />
+      <Freebie />
+      <Payment />
+      <Contact />
+    </div>
   )
 }
-
-export default page

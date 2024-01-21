@@ -3,6 +3,7 @@ import { readClient } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/sanityImageUrl"; 
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
+import BlogNav from "@/components/component/BlogNav";
 
 async function getData(slug: string) {
   const query = `*[_type == "post" && slug.current == "${slug}"][0]`;
@@ -37,7 +38,7 @@ export default async function SlugPage({
 
   return (
     <div className='selection:bg-gray-900 text-white h-full  py-32'>
-       
+       <BlogNav />
         <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
       <header className="pt-6 xl:pb-6">
@@ -70,6 +71,7 @@ export default async function SlugPage({
       </div>
     </div>
     </main>
+    
     </div>
   );
 }

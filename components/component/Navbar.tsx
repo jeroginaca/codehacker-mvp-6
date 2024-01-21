@@ -1,41 +1,49 @@
+"use client"
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { NavLinks, NavLinksResp } from '.'
+import { useEffect, useState } from 'react';
 
 const Navbar = () => {
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="flex-center fixed top-0 z-50 w-full border-b-2 border-black-200 bg-black-100 py-7 text-white">
-        <div className="flex-between mx-auto w-full max-w-screen-2xl px-6 xs:px-8 sm:px-16">
-            <Link href="/">
-                <Image 
-                    src="/jsm-logo.svg" 
-                    alt="logo" 
-                    width={55} 
-                    height={40}
-                />
-            </Link>
+    <>
+      <div className={`navbar flex justify-between items-center text-white fixed w-full md:py-1 pr-4 md:pr-0 md:px-[3rem] z-[10000] ${scrolling ? 'gradient-bg' : ''}`}>
+        <Link href="/">
+          <Image 
+            src="https://res.cloudinary.com/dr3cvyonp/image/upload/v1694439448/Logo_qbbelb.png"
+            width={80}
+            height={80}
+            alt="logo"
+          />
+        </Link>
 
-                <Image 
-                    src="/hamburger-menu.svg" 
-                    alt="menu" 
-                    width={30} 
-                    height={30}
-                    className="block md:hidden"
-                />
+        <NavLinks />
 
-                <ul className="flex-center gap-x-3 max-md:hidden md:gap-x-10">
-                <li className="body-text- text-gradient_blue-purple font-bold">
-                    <Link href="https://codehackeracademy.com" target='_blank'>
-                    CodeHacker Academy
-                    </Link>
-                </li>
-                <li className="body-text font-normal">
-                    <Link href="https://codehackeracademy.com" target='_blank'>
-                        Contacto
-                    </Link>
-                </li>
-                </ul>
-        </div>
-    </nav>
+        <Link href="/curso-gratis" className="hidden md:flex text-[20px]  py-[12px] px-[30px] font-semibold tracking-[.10em]">Recursos Gratis</Link> 
+         
+        <NavLinksResp />
+      </div>
+
+    </>
   )
 }
 
